@@ -8,12 +8,6 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
   },
-  server: {
-    open: true,
-  },
-  preview: {
-    open: true,
-  },
   resolve: {
     alias: {
       "@": resolve("src"),

@@ -1,0 +1,44 @@
+@layer components {
+  .container {
+    max-width: 80rem;
+    padding-inline: 1rem;
+    margin-inline: auto;
+    width: auto;
+  }
+
+  .section {
+    position: relative;
+  }
+
+  .Button--fullfilled {
+    @apply bg-gradient-1 text-white font-bold px-5 py-3 rounded-xl flex items-center gap-3 sm:text-xl text-sm whitespace-nowrap justify-center;
+
+    img,
+    svg {
+      @apply flex-shrink-0;
+    }
+  }
+
+  .Heading {
+    @apply text-[2rem] tracking-wide lowercase leading-none sm:text-5xl;
+  }
+
+  .ListItem {
+    @apply before:bg-current before:w-1 before:h-1 before:block before:rounded-full flex before:shrink-0 items-start before:mt-[0.6875rem] before:mr-2;
+  }
+
+  .Input {
+    @apply text-neutral-1 bg-transparent border-b border-neutral-300 py-1;
+
+    &::placeholder {
+      @apply text-neutral-400;
+    }
+
+    &[aria-invalid="true"] {
+      @apply text-red-500 border-red-500;
+      &::placeholder {
+        @apply text-red-500;
+      }
+    }
+  }
+}

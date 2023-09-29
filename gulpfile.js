@@ -5,23 +5,38 @@ import imagemin from "gulp-imagemin";
 import fonter from "gulp-fonter";
 import ttf2woff2 from "gulp-ttf2woff2";
 
-import { deleteAsync as del } from "del";
 import { resolve } from "path";
 const { src, dest, watch, task, series } = gulp;
 
 const input = {
-  images: resolve("assets/images"),
-  static: resolve("assets/images/static"),
-  svg: resolve("assets/svg"),
-  fonts: resolve("assets/fonts"),
+  fonts: resolve("assets/common/fonts"),
+  commonImages: resolve("assets/common/images"),
+  commonStatic: resolve("assets/common/images/static"),
+  commonSvg: resolve("assets/common/svg"),
+  images: resolve("assets/pages/**/images"),
+  static: resolve("assets/pages/**/images/static"),
+  svg: resolve("assets/pages/**/svg"),
+  pages: resolve("assets/pages"),
 };
 const output = {
-  images: resolve("src/assets/images"),
-  static: resolve("src/assets/images/static"),
-  svg: resolve("src/assets/svg"),
   fonts: resolve("src/assets/fonts"),
+  commonImages: resolve("src/assets/images"),
+  commonStatic: resolve("src/assets/images/static"),
+  commonSvg: resolve("src/assets/svg"),
+  images: resolve("src/pages"),
+  static: resolve("src/pages"),
+  svg: resolve("src/pages"),
 };
 
+/* IMAGES */
+function commonImages() {
+  return src([resolve(input.commonImages, "**/*")], {
+    ignore: resolve(input.commonStatic, "**/*"),
+  })
+    .pipe(newer(output.commonImages))
+    .pipe(webp())
+    .pipe(dest(output.commonImages));
+}
 function images() {
   return src([resolve(input.images, "**/*")], {
     ignore: resolve(input.static, "**/*"),
@@ -31,7 +46,7 @@ function images() {
     .pipe(dest(output.images));
 }
 
-function staticImages() {
+function commonStaticImages() {
   return src(resolve(input.static, "**/*"))
     .pipe(
       imagemin({
@@ -43,8 +58,8 @@ function staticImages() {
     .pipe(dest(output.static));
 }
 
-function svg() {
-  return src(resolve(input.svg, "**/*")).pipe(dest(output.svg));
+function commonSvg() {
+  return src(resolve(input.commonSvg, "**/*")).pipe(dest(output.commonSvg));
 }
 
 function fonts() {
@@ -58,18 +73,16 @@ function fonts() {
 
 function watcher() {
   watch(input.fonts, fonts);
-  watch(input.images, images);
-  watch(input.svg, svg);
+  watch(input.commonImages, commonImages);
+  watch(input.commonSvg, commonSvg);
+  watch(input.pages, images);
 }
 
-function cleanDist() {
-  return del(resolve("dist"));
-}
-
-function cleanAssets() {
-  return del(resolve("src/assets/*"));
-}
-
-task("default", series(fonts, images, staticImages, svg, watcher));
-task("build", series(fonts, images, staticImages, svg));
-task("clean", series(cleanDist, cleanAssets));
+task(
+  "default",
+  series(fonts, commonImages, commonStaticImages, commonSvg, images, watcher)
+);
+task(
+  "build",
+  series(fonts, commonImages, commonStaticImages, commonSvg, images)
+);
