@@ -1,5 +1,5 @@
 import { Variants, motion } from "framer-motion";
-import logo from "@/assets/svg/logo.svg";
+import logo from "@/assets/svg/Logo.svg";
 import decor from "@/assets/images/mobileMenu.webp";
 import buttonArrow from "@/assets/svg/buttonArrow.svg";
 import { Dispatch, SetStateAction } from "react";

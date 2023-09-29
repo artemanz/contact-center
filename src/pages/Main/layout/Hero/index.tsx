@@ -1,4 +1,4 @@
-import logo from "@/assets/svg/logo.svg";
+import logo from "@/assets/svg/Logo.svg";
 import { heroDecor, heroGlobus } from "../../images";
 import buttonArrow from "@/assets/svg/buttonArrow.svg";
 import { useState } from "react";
