@@ -2,10 +2,12 @@ import { Variants, motion } from "framer-motion";
 import logo from "@/assets/svg/Logo.svg";
 import decor from "@/assets/images/mobileMenu.webp";
 import buttonArrow from "@/assets/svg/buttonArrow.svg";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   close: () => void;
+  children: ReactNode;
 }
 
 const variants: Variants = {
@@ -13,7 +15,7 @@ const variants: Variants = {
   invisible: { y: "-100vh" },
 };
 
-const MobileMenu = ({ close }: Props) => {
+const MobileMenu = ({ close, children }: Props) => {
   return (
     <motion.div
       transition={{ bounce: false }}
@@ -31,9 +33,9 @@ const MobileMenu = ({ close }: Props) => {
         />
         <div className="relative flex flex-col justify-between h-full pb-8 ">
           <div className="relative flex justify-between py-10">
-            <a className="max-w-[50%]" href="#" onClick={close}>
+            <Link className="max-w-[50%]" to="/" onClick={close}>
               <img src={logo} alt="Logo" />
-            </a>
+            </Link>
             <button onClick={close}>
               <svg
                 width="22"
@@ -63,38 +65,7 @@ const MobileMenu = ({ close }: Props) => {
             </button>
           </div>
 
-          <nav className="">
-            <ul className="flex flex-col items-center gap-10 text-2xl">
-              <li>
-                <a onClick={close} href="#about">
-                  какие задачи мы решаем
-                </a>
-              </li>
-              <li>
-                <a onClick={close} href="#directions">
-                  направления
-                </a>
-              </li>
-              <li>
-                <a onClick={close} href="#methods">
-                  методы
-                </a>
-              </li>
-              <li>
-                <a onClick={close} href="#priceList">
-                  цены
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          <a
-            className="self-center Button--fullfilled w-[15rem] xs:w-[20rem]"
-            href="#form"
-            onClick={close}
-          >
-            заказать услуги <img src={buttonArrow} alt="@" />
-          </a>
+          {children}
         </div>
       </div>
     </motion.div>

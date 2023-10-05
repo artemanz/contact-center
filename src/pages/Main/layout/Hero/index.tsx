@@ -1,13 +1,16 @@
 import logo from "@/assets/svg/Logo.svg";
 import { heroDecor, heroGlobus } from "../../images";
 import buttonArrow from "@/assets/svg/buttonArrow.svg";
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import MobileMenu from "@/components/MobileMenu";
+import { Link } from "react-router-dom";
 
-interface Props {}
+interface Props {
+  setForm: Dispatch<boolean>;
+}
 
-const Hero = (props: Props) => {
+const Hero = ({ setForm }: Props) => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
@@ -28,23 +31,56 @@ const Hero = (props: Props) => {
           <nav className="hidden lg:flex">
             <ul className="flex gap-7">
               <li>
-                <a href="#about">какие задачи мы решаем</a>
+                <a
+                  className="transition-colors hover:text-accent-2"
+                  href="#about"
+                >
+                  какие задачи мы решаем
+                </a>
               </li>
               <li>
-                <a href="#directions">направления</a>
+                <a
+                  className="transition-colors hover:text-accent-2"
+                  href="#directions"
+                >
+                  направления
+                </a>
               </li>
               <li>
-                <a href="#methods">методы</a>
+                <a
+                  className="transition-colors hover:text-accent-2"
+                  href="#methods"
+                >
+                  методы
+                </a>
               </li>
               <li>
-                <a href="#priceList">цены</a>
+                <a
+                  className="transition-colors hover:text-accent-2"
+                  href="#priceList"
+                >
+                  цены
+                </a>
+              </li>
+              <li>
+                <Link
+                  to={"/blog"}
+                  className="transition-colors hover:text-accent-2"
+                >
+                  блог
+                </Link>
               </li>
             </ul>
           </nav>
-          <a href="#form" className="hidden Button--fullfilled lg:flex">
+          <button
+            onClick={() => {
+              setForm(true);
+            }}
+            className="hidden Button--fullfilled lg:flex"
+          >
             заказать услуги
             <img src={buttonArrow} alt="@" />
-          </a>
+          </button>
           <button
             onClick={() => {
               setMobileMenu(true);
@@ -83,10 +119,15 @@ const Hero = (props: Props) => {
               обеспечивая клиентам качественное обслуживание и удовлетворение их
               потребностей.
             </p>
-            <a href="#form" className="mt-10 Button--fullfilled w-fit">
+            <button
+              onClick={() => {
+                setForm(true);
+              }}
+              className="mt-10 Button--fullfilled w-fit"
+            >
               заказать обратный звонок
               <img src={buttonArrow} alt="@" />
-            </a>
+            </button>
           </div>
         </div>
       </motion.div>
@@ -97,7 +138,47 @@ const Hero = (props: Props) => {
             close={() => {
               setMobileMenu(false);
             }}
-          />
+          >
+            <nav className="text-center">
+              <ul className="flex flex-col items-center gap-10 text-2xl">
+                <li>
+                  <a onClick={() => setMobileMenu(false)} href="#about">
+                    какие задачи мы решаем
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setMobileMenu(false)} href="#directions">
+                    направления
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setMobileMenu(false)} href="#methods">
+                    методы
+                  </a>
+                </li>
+                <li>
+                  <a onClick={() => setMobileMenu(false)} href="#priceList">
+                    цены
+                  </a>
+                </li>
+                <li>
+                  <Link onClick={() => setMobileMenu(false)} to="/blog">
+                    блог
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+
+            <button
+              className="self-center Button--fullfilled w-[15rem] xs:w-[20rem]"
+              onClick={() => {
+                setMobileMenu(false);
+                setForm(true);
+              }}
+            >
+              заказать услуги <img src={buttonArrow} alt="@" />
+            </button>
+          </MobileMenu>
         )}
       </AnimatePresence>
     </section>

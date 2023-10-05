@@ -4,7 +4,7 @@ interface Props {}
 
 const About = (props: Props) => {
   return (
-    <section className="my-24 section" id="#about">
+    <section className="my-24 section" id="about">
       <div className="container">
         <h2 className="Heading text-[1.9rem] sm:text-5xl max-w-2xl">
           Какие ситуации помогает решить контакт центр

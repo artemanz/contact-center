@@ -20,6 +20,8 @@ export default {
       },
       backgroundImage: {
         "gradient-1": "linear-gradient(180deg, #AE4A84 0%, #393185 100%)",
+        "gradient-2":
+          "linear-gradient(180deg, #AE4A84 0%, #AE4A84 50%, #393185 100%)",
       },
     },
   },

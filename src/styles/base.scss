@@ -2,4 +2,26 @@
   body {
     font-family: "Manrope Variable", sans-serif;
   }
+
+  .Post {
+    font-size: 16px;
+    h1 {
+      font-weight: bold;
+      font-size: 2em;
+    }
+    h2 {
+      font-weight: bold;
+      font-size: 1.6em;
+    }
+    h3 {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    img {
+      max-width: 100%;
+    }
+    a {
+      @apply underline;
+    }
+  }
 }

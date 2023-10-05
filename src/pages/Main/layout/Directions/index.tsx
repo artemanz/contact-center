@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { direction1, direction2, direction3, direction4 } from "../../images";
 import buttonArrow from "@/assets/svg/buttonArrow.svg";
 import { motion } from "framer-motion";
 
-interface Props {}
+interface Props {
+  setForm: Dispatch<boolean>;
+}
 
-const Directions = (props: Props) => {
+const Directions = ({ setForm }: Props) => {
   const popupContents = [
     {
       id: 1,
@@ -320,13 +322,16 @@ const Directions = (props: Props) => {
 
               <div className="mt-10">{popupContent.content}</div>
 
-              <a
-                href="#form"
+              <button
+                onClickCapture={() => {}}
                 className="mt-10 Button--fullfilled w-fit"
-                onClick={() => setPopup(false)}
+                onClick={() => {
+                  setPopup(false);
+                  setForm(true);
+                }}
               >
                 Заказать услугу <img src={buttonArrow} alt="@" />
-              </a>
+              </button>
             </div>
           </motion.div>
         </div>

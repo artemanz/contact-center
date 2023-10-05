@@ -1,0 +1,49 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  animation: modal 300ms ease;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalWrapper {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  padding: 2rem 4rem;
+  border-radius: 12px;
+  animation: modalWrapper 300ms ease;
+  @apply container;
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalWrapper {
+  from {
+    translate: 0 5rem;
+  }
+  to {
+    translate: 0;
+  }
+}

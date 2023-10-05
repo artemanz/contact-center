@@ -1,10 +1,19 @@
 import buttonArrow from "@/assets/svg/buttonArrow.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import IMask from "imask";
-import { useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  Dispatch,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-interface Props {}
+interface Props {
+  successPopup: boolean;
+  setSuccessPopup: Dispatch<boolean>;
+}
 
 interface IForm {
   name: string;
@@ -14,8 +23,7 @@ interface IForm {
   text: string;
 }
 
-const Form = (props: Props) => {
-  const [successPopup, setSuccessPopup] = useState(false);
+const Form = ({ successPopup, setSuccessPopup }: Props) => {
   const {
     register,
     handleSubmit,
@@ -34,6 +42,8 @@ const Form = (props: Props) => {
   });
   const submit: SubmitHandler<IForm> = (data) => {
     const $data = JSON.stringify(data);
+    console.log($data);
+
     reset();
     setSuccessPopup(true);
   };
@@ -106,10 +116,11 @@ const Form = (props: Props) => {
                 placeholder="номер телефона*"
               />
               <input
-                {...register("company")}
+                aria-invalid={errors.company ? true : false}
+                {...register("company", { required: true })}
                 className="Input"
                 type="text"
-                placeholder="компания"
+                placeholder="компания*"
               />
               <textarea
                 aria-invalid={errors.text ? true : false}
@@ -140,33 +151,6 @@ const Form = (props: Props) => {
           </div>
         </form>
       </div>
-
-      <AnimatePresence>
-        {successPopup && (
-          <div
-            className="fixed inset-0 z-10 grid content-center p-4"
-            onClick={() => {
-              setSuccessPopup(false);
-            }}
-          >
-            <div className="fixed inset-0 bg-black opacity-80"></div>
-            <motion.div
-              initial={{ y: 100 }}
-              animate={{ y: 0 }}
-              className="container relative px-4 py-12 overflow-hidden overflow-y-auto bg-white rounded-2xl md:px-20"
-            >
-              <div className="relative">
-                <div className="flex flex-col items-center">
-                  <p className="text-4xl">Спасибо за ваше обращение!</p>
-                  <p className="mt-4 text-xl">
-                    Наш менеджер свяжется с вами в ближайшее время!
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };
