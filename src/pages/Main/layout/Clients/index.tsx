@@ -9,7 +9,7 @@ const Clients = (props: Props) => {
         <h2 className="Heading">наши клиенты</h2>
       </div>
       <img
-        className="mt-24 origin-top-left max-w-none animate-slide"
+        className="mt-24 origin-top-left max-w-none"
         src={logos}
         alt=""
       />
