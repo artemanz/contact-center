@@ -37,7 +37,10 @@ const ModalForm = ({ setModal, setSuccessPopup }: Props) => {
   const submit: SubmitHandler<IForm> = (data) => {
     if (data.connectionType === "") data.connectionType = "call_phone";
     const $data = JSON.stringify(data);
-    console.log($data);
+    fetch("/api/mail.php", {
+      body: $data,
+      method: "POST"
+    })
 
     reset();
     setModal(false);

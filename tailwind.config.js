@@ -5,8 +5,8 @@ export default {
     extend: {
       keyframes: {
         slide: {
-          "0%": { translate: "-30%" },
-          "100%": { translate: "-50%" },
+          "0%": { transform: "translateX(-30%)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
       animation: { slide: "slide 15s linear infinite" },

@@ -40,9 +40,13 @@ const Form = ({ successPopup, setSuccessPopup }: Props) => {
       text: "",
     },
   });
-  const submit: SubmitHandler<IForm> = (data) => {
+  const submit: SubmitHandler<IForm> = async (data) => {
     const $data = JSON.stringify(data);
-    console.log($data);
+
+    fetch("/api/mail.php", {
+      body: $data,
+      method: "POST"
+    })
 
     reset();
     setSuccessPopup(true);
